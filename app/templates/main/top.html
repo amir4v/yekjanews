@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col">
+
+        <div class="row">
+            <div class="col">
+                <!-- TABLIGH balaye-khabar-e-aval-dar-safhe-ye-aval=(top  &  category & important & latest & search & viewed) -->
+                <!-- TABLIGH news-top -->
+                <div id="sabavision_zone_10065-Z943_plate"></div>
+            </div>
+        </div>
+        <br>
+
+        <div class="card">
+
+            <a href="/news/{{top.id}}/{{top.slug}}" target="_blank" style="text-decoration: none; color: black;">
+                <img src="{{top.media}}" class="card-img-top" width="100%">
+            </a>
+            <div class="card-body farsi">
+                <h5 class="card-title">
+                    <a href="{{top.news_publisher_address}}" target="_blank"
+                        style="text-decoration: none; color: blueviolet;">
+                        <small>{{top.news_publisher_name}}</small>
+                    </a>
+                    <span style="color: grey;">|</span>
+                    <a href="/news/{{top.id}}/{{top.slug}}" target="_blank"
+                        style="text-decoration: none; color: black;">
+                        {{top.title | slice:"0:70"}}
+                        {% if top.title|length > 70 %}
+                        ...
+                        {% endif %}
+                    </a>
+                </h5>
+                {% if top.description %}
+                <p class="card-text" style="color: grey;">
+                    {{top.description | slice:"0:144"}}
+                    {% if top.description|length > 144 %}
+                    ...
+                    {% endif %}
+                    <small style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+                        {{top.jalali_pub_dt}}
+                    </small>
+                </p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>

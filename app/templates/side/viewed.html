@@ -1,0 +1,26 @@
+<div class="card farsi">
+    <div class="card-body" style="padding: 0px !important;">
+        <div class="card-title" style="margin-bottom: 1.3em; margin-top: 0.5em;">
+            <h6 class="text-center" style="padding-top: 0px; color: green;">
+                پربازدیدترین
+            </h6>
+            <hr>
+        </div>
+        <div class="card-text">
+            <ul class="viewed" style="padding: 0px; list-style: none; margin-bottom: 1em; margin-right: 1em; margin-left: 1em;">
+                {% for n in viewed %}
+                <li>
+                    <small>
+                        <a href="/news/{{n.id}}/{{n.slug}}" target="_blank" style="color: inherit;">
+                            {{n.title}}
+                        </a>
+                    </small>
+                </li>
+                {% if not forloop.last %}
+                <hr>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

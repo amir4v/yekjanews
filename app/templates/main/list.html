@@ -1,0 +1,148 @@
+<div class="row">
+    <div class="col" id="list">
+        {% if category %}
+        <a href="/category/{{category.id}}/{{category.slug}}" class="btn btn-light"
+            style="width: 100%; border: 1px solid purple;">
+            <h5 class="farsi" style="padding: 0.5em;">
+                {{category.title}}
+            </h5>
+        </a>
+        <br>
+        <br>
+        <br>
+        {% endif %}
+
+        {% for n in list %}
+        <div class="card farsi">
+            <div class="card-header">
+                {% if n.description is None and n.media is not None %}
+                <div class="row">
+                    <div class="col-3">
+                        <a href="/news/{{n.id}}/{{n.slug}}" target="_blank"
+                            style="text-decoration: none; color: black;">
+                            <img src="{{n.media}}" class="rounded" width="100%">
+                        </a>
+                    </div>
+                    <div class="col my-auto">
+                        <a href="{{n.news_publisher_address}}" target="_blank"
+                            style="text-decoration: none; color: blueviolet;">
+                            <small>{{n.news_publisher_name}}</small>
+                        </a>
+                        <span style="color: grey;">|</span>
+                        <a href="/news/{{n.id}}/{{n.slug}}" target="_blank"
+                            style="text-decoration: none; color: black;">
+                            {{n.title | slice:"0:70"}}
+                            {% if n.title|length > 70 %}
+                            ...
+                            {% endif %}
+                            <small
+                                style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+                                {{n.jalali_pub_dt}}
+                            </small>
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{{n.news_publisher_address}}" target="_blank"
+                    style="text-decoration: none; color: blueviolet;">
+                    <small>{{n.news_publisher_name}}</small>
+                </a>
+                <span style="color: grey;">|</span>
+                <a href="/news/{{n.id}}/{{n.slug}}" target="_blank" style="text-decoration: none; color: black;">
+                    {{n.title | slice:"0:70"}}
+                    {% if n.title|length > 70 %}
+                    ...
+                    {% endif %}
+                    {% if n.description is None and n.media is None %}
+                    <small style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+                        {{n.jalali_pub_dt}}
+                    </small>
+                    {% endif %}
+                </a>
+                {% endif %}
+            </div>
+            {% if n.description %}
+            <div class="card-body" style="padding: 1%;">
+                <p class="card-text">
+                    {% if n.description and n.media %}
+                <div class="row">
+                    <div class="col-3">
+                        <a href="/news/{{n.id}}/{{n.slug}}" target="_blank"
+                            style="text-decoration: none; color: black;">
+                            <img src="{{n.media}}" class="rounded" width="100%">
+                        </a>
+                    </div>
+                    <div class="col">
+                        <small style="color: rgb(100, 100, 100);">
+                            {{n.description | slice:"0:144"}}
+                            {% if n.description|length > 144 %}
+                            ...
+                            {% endif %}
+                        </small>
+                        <small
+                            style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+                            {{n.jalali_pub_dt}}
+                        </small>
+                    </div>
+                </div>
+                {% else %}
+                <small style="color: rgb(100, 100, 100);">
+                    {{n.description | slice:"0:144"}}
+                    {% if n.description|length > 144 %}
+                    ...
+                    {% endif %}
+                </small>
+                <small style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+                    {{n.jalali_pub_dt}}
+                </small>
+                {% endif %}
+                </p>
+            </div>
+            {% endif %}
+        </div>
+        <br>
+        <br>
+
+        {% empty %}
+        <br>
+        <br>
+        <i>
+            <h1 class="farsi" style="color: blueviolet; border-bottom: 1px solid grey;">
+                <center>
+                    <span>پیدا نشد!</span>
+                    <br>
+                    <br>
+                </center>
+            </h1>
+        </i>
+        <br>
+        <br>
+        {% endfor %}
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col">
+            <!-- YEKTANET bade-list -->
+            <div id="pos-article-display-27094"></div>
+        </div>
+    </div>
+
+</div>
+
+<br><br> <!-- for YEKTANET bade-list -->
+
+<div class="row" id="paginate">
+    <div class="col">
+        <center>
+            {% include 'main/paginate.html' %}
+        </center>
+    </div>
+</div>
+
+<script>
+    var flag = {{ list.count }} == 0;
+    if (flag) {
+        document.getElementById("paginate").style.display = "none";
+    }
+</script>

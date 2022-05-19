@@ -1,0 +1,4 @@
+*__pycache__*
+*.pyc*
+yekjanews.zip
+db.sqlite3

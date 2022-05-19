@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-md-6 col-xs-12 col-sm-12 bit-two">
+        <div class="card">
+
+            <a href="/news/{{two.0.id}}/{{two.0.slug}}" target="_blank" style="text-decoration: none; color: black;">
+                <img src="{{two.0.media}}" class="card-img-top" width="100%">
+            </a>
+            <div class="card-body farsi">
+                <h5 class="card-title">
+                    <a href="{{two.0.news_publisher_address}}" target="_blank"
+                        style="text-decoration: none; color: blueviolet;">
+                        <small>{{two.0.news_publisher_name}}</small>
+                    </a>
+                    <span style="color: grey;">|</span>
+                    <a href="/news/{{two.0.id}}/{{two.0.slug}}" target="_blank"
+                        style="text-decoration: none; color: black;">
+                        {{two.0.title | slice:"0:70"}}
+                        {% if two.0.title|length > 70 %}
+                        ...
+                        {% endif %}
+                    </a>
+                </h5>
+                {% if two.0.description %}
+                <p class="card-text" style="color: grey;">
+                    {{two.0.description | slice:"0:144"}}
+                    {% if two.0.description|length > 144 %}
+                    ...
+                    {% endif %}
+                    <small style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+                        {{two.0.jalali_pub_dt}}
+                    </small>
+                </p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xs-12 col-sm-12">
+        <div class="card">
+
+            <a href="/news/{{two.1.id}}/{{two.1.slug}}" target="_blank" style="text-decoration: none; color: black;">
+                <img src="{{two.1.media}}" class="card-img-top" width="100%">
+            </a>
+            <div class="card-body farsi">
+                <h5 class="card-title">
+                    <a href="{{two.1.news_publisher_address}}" target="_blank"
+                        style="text-decoration: none; color: blueviolet;">
+                        <small>{{two.1.news_publisher_name}}</small>
+                    </a>
+                    <span style="color: grey;">|</span>
+                    <a href="/news/{{two.1.id}}/{{two.1.slug}}" target="_blank"
+                        style="text-decoration: none; color: black;">
+                        {{two.1.title | slice:"0:70"}}
+                        {% if two.1.title|length > 70 %}
+                        ...
+                        {% endif %}
+                    </a>
+                </h5>
+                {% if two.1.description %}
+                <p class="card-text" style="color: grey;">
+                    {{two.1.description | slice:"0:144"}}
+                    {% if two.1.description|length > 144 %}
+                    ...
+                    {% endif %}
+                    <small style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+                        {{two.1.jalali_pub_dt}}
+                    </small>
+                </p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="type-script" style="width: 100%;">
+    <div class="newswidget-table-wrapper" data-position="front"></div>
+    <script>
+        function get_newswidget_table() {
+
+            var ext = (new Date().getUTCFullYear()) + '-' + (new Date().getUTCMonth() + 1) + '-' + (new Date().getUTCDate()) + '-' + (new Date().getUTCHours()) + '-' + parseInt(new Date().getUTCMinutes() / 5, 10);
+
+            var domain = "parsnews";
+
+            jQuery('.newswidget-table-wrapper').each(function () {
+                var pos = jQuery(this).attr('data-position');
+                var url = "https://files.newswidget.net/widgets/" + domain + "-" + pos + ".html?" + ext;
+                jQuery(this).html('').load(url);
+            });
+        }
+
+        jQuery(document).ready(function () {
+            get_newswidget_table();
+        });
+    </script>
+
+    <p class="farsi" style="font-size: 14px; padding: 0px; margin: 0px; color: grey; text-align: center !important;">
+        منبع:
+        <a href="https://www.parsnews.com/" target="_blank" style="color: grey; display: inline;">parsnews.com</a>
+    </p>
+</div>

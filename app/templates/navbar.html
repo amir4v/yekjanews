@@ -1,0 +1,64 @@
+{% load static %}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid grey;">
+    <div class="container-fluid container">
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'logo.png' %}">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="direction: rtl; padding-right: 0px; margin-right: 0px;">
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="https://zarinp.al/yekjanews" target="_blank">
+                        <img src="{% static 'donate.png' %}" width="25px">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="http://t.me/yekjanews" target="_blank" style="color: #0088CC;">
+                        کانال تلگرام
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">صفحه اصلی</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/important">اخبار مهم</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/viewed">پربازدیدترین</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/latest">آخرین اخبار</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" href="" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        دسته بندی
+                    </a>
+                    <ul class="dropdown-menu farsi" aria-labelledby="navbarDropdown">
+                        {% for c in cats %}
+                        <li>
+                            <a class="dropdown-item" href="/category/{{c.id}}/{{c.slug}}">
+                                {{c.title}}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <form action="/search" method="GET">
+                        <input type="text" name="q" class="form form-control" placeholder="جستجو" required>
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

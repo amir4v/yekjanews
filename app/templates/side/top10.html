@@ -1,0 +1,22 @@
+<div class="card farsi">
+    <div class="card-body">
+        <div class="card-title" style="margin-bottom: 1.3em;">
+            <h1 class="text-center" style="padding-top: 0px; color: crimson; border-bottom: 1px solid rgb(170, 170, 170);">
+                ۱۰ خبر برتر
+            </h1>
+        </div>
+        <div class="card-text">
+            <ul class="top10" style="margin: 0px; margin-right: 1%; margin-left: 1%; padding: 0px;">
+                {% for n in top10 %}
+                <li class="top10item">
+                    <small>
+                        <a href="/news/{{n.id}}/{{n.slug}}" target="_blank" style="color: inherit;">
+                            {{n.title}}
+                        </a>
+                    </small>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

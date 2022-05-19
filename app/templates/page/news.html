@@ -1,0 +1,75 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% if news.category %}
+<a href="/category/{{news.category.id}}/{{news.category.slug}}" class="btn btn-light"
+	style="width: 100%; border: 1px solid purple;">
+	<h5 class="farsi" style="padding: 0.5em;">
+		{{news.category.title}}
+	</h5>
+</a>
+<br>
+<br>
+{% endif %}
+
+<div class="row">
+	<div class="col">
+		<!-- TABLIGH news-top -->
+		<div id="sabavision_zone_10065-Z943_plate"></div>
+	</div>
+</div>
+<br>
+
+<div class="card">
+
+	{% if news.media %}
+	<img src="{{news.media}}" class="card-img-top" width="100%">
+	{% endif %}
+	<div class="card-body farsi">
+		<h5 class="card-title">
+			<a href="{{news.news_publisher_address}}" target="_blank" style="text-decoration: none; color: blueviolet;">
+				<small>{{news.news_publisher_name}}</small>
+			</a>
+			<span style="color: grey;">|</span>
+			{{news.title}}
+			{% if news.description is None %}
+			<small style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+				{{news.jalali_pub_dt}}
+			</small>
+			{% endif %}
+		</h5>
+		{% if news.description %}
+		<p class="card-text" style="color: grey;">
+			{{news.description}}
+			<small style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+				{{news.jalali_pub_dt}}
+			</small>
+		</p>
+		{% endif %}
+	</div>
+
+</div>
+
+<br><br>
+<center>
+	<a href="/go/{{news.id}}" style="text-decoration: none;" class="btn btn-success">
+		<h4 style="color: white !important;">
+			شرح کامل خبر
+			<small style="font-size: 0.7em;">- ارجاع به منبع</small>
+		</h4>
+	</a>
+</center>
+
+<br><br>
+<div class="row">
+	<div class="col">
+		<!-- YEKTANET bade-news -->
+		<div id="pos-article-display-26992"></div>
+    </div>
+</div>
+<br><br>
+{% endblock %}
+
+{% block meta_description %}
+{{news.title}}
+{% endblock %}

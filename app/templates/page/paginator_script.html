@@ -1,0 +1,189 @@
+<script>
+    list = document.getElementById("list");
+
+    more_btn = document.getElementById("more_btn");
+    br = document.getElementById("br");
+
+    function more() {
+        more_btn.style.display = "none";
+
+
+        $.get(route, { "page": page }, function () { })
+            .done(function (data) {
+
+                if (data.length == 0) {
+                    more_btn.style.display = "none";
+                    br.style.display = "none";
+
+                    return 0;
+                }
+
+
+                for (var i = 0; i < data.length; i++) {
+
+
+                    //
+                    if (data[i].fields.description == null && data[i].fields.media == null) {
+
+                        dot = '';
+                        if(data[i].fields.title.length > 70){
+                            dot = ' ...';
+                        }
+
+                        list.innerHTML += `
+<div class="card farsi">
+<div class="card-header">
+<a href="`+ data[i].fields.news_publisher_address + `" target="_blank" style="text-decoration: none; color: blueviolet;">
+<small>`+ data[i].fields.news_publisher_name + `</small>
+</a>
+<span style="color: grey;">|</span>
+<a href="/news/`+ data[i].pk + `/` + data[i].fields.title + `" target="_blank" style="text-decoration: none; color: black;">
+`+ data[i].fields.title.substr(0,70)+dot +`
+<small
+style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+`+ data[i].fields.jalali_pub_dt +`
+</small>
+</a>
+</div>
+</div>
+<br><br>
+`;
+                    }
+
+
+                    //
+                    if (data[i].fields.description == null && data[i].fields.media != null) {
+
+                        dot = '';
+                        if(data[i].fields.title.length > 70){
+                            dot = ' ...';
+                        }
+
+                        list.innerHTML += `
+<div class="card farsi">
+<div class="card-header">
+<div class="row">
+<div class="col-3">
+<a href="/news/`+ data[i].pk + `/` + data[i].fields.title + `" target="_blank" style="text-decoration: none; color: black;">
+<img src="`+ data[i].fields.media + `" class="rounded" width="100%">
+</a>
+</div>
+<div class="col my-auto">
+<a href="`+ data[i].fields.news_publisher_address + `" target="_blank" style="text-decoration: none; color: blueviolet;">
+<small>`+ data[i].fields.news_publisher_name + `</small>
+</a>
+<span style="color: grey;">|</span>
+<a href="/news/`+ data[i].pk + `/` + data[i].fields.title + `" target="_blank" style="text-decoration: none; color: black;">
+`+ data[i].fields.title.substr(0,70)+dot +`
+<small
+style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+`+ data[i].fields.jalali_pub_dt +`
+</small>
+</a>
+</div>
+</div>
+</div>
+</div>
+<br><br>
+`;
+                    }
+
+
+                    //
+                    if (data[i].fields.description != null && data[i].fields.media == null) {
+
+                        dot = '';
+                        if(data[i].fields.title.length > 70){
+                            dot = ' ...';
+                        }
+
+                        dotd = '';
+                        if(data[i].fields.description.length > 144){
+                            dotd = ' ...';
+                        }
+
+                        list.innerHTML += `
+<div class="card farsi">
+<div class="card-header"> 
+<a href="`+ data[i].fields.news_publisher_address + `" target="_blank" style="text-decoration: none; color: blueviolet;">
+<small>`+ data[i].fields.news_publisher_name + `</small>
+</a>
+<span style="color: grey;">|</span>
+<a href="/news/`+ data[i].pk + `/` + data[i].fields.title + `" target="_blank" style="text-decoration: none; color: black;">` + data[i].fields.title.substr(0,70)+dot + `</a>
+</div>
+<div class="card-body" style="padding: 1%;">
+<p class="card-text">
+<small style="color: rgb(100, 100, 100);">
+`+ data[i].fields.description.substr(0,144)+dotd + `
+</small>
+<small
+style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+`+ data[i].fields.jalali_pub_dt +`
+</small>
+</p>
+</div>      
+</div>
+<br><br>
+`;
+                    }
+
+
+                    //
+                    if (data[i].fields.description != null && data[i].fields.media != null) {
+
+                        dot = '';
+                        if(data[i].fields.title.length > 70){
+                            dot = ' ...';
+                        }
+
+                        dotd = '';
+                        if(data[i].fields.description.length > 144){
+                            dotd = ' ...';
+                        }
+                        
+                        list.innerHTML += `
+<div class="card farsi">
+<div class="card-header">
+<a href="`+ data[i].fields.news_publisher_address + `" target="_blank" style="text-decoration: none; color: blueviolet;">
+<small>`+ data[i].fields.news_publisher_name + `</small>
+</a>
+<span style="color: grey;">|</span>
+<a href="/news/`+ data[i].pk + `/` + data[i].fields.title + `" target="_blank" style="text-decoration: none; color: black;">` + data[i].fields.title.substr(0,70)+dot + `</a>
+</div>
+<div class="card-body" style="padding: 1%;">
+<p class="card-text">
+</p><div class="row">
+<div class="col-3">
+<a href="/news/`+ data[i].pk + `/` + data[i].fields.title + `" target="_blank" style="text-decoration: none; color: black;">
+<img src="`+ data[i].fields.media + `" class="rounded" width="100%">
+</a>
+</div>
+<div class="col">
+<small style="color: rgb(100, 100, 100);">
+`+ data[i].fields.description.substr(0,144)+dotd + `
+</small>
+<small
+style="color: grey; display: block; direction: ltr; text-align: left; margin-top: 0.5em;">
+`+ data[i].fields.jalali_pub_dt +`
+</small>
+</div>
+</div>
+<p></p>
+</div>
+</div>
+<br><br>
+`;
+                    }
+                }
+
+
+            });
+
+
+        page++;
+
+        more_btn.style.display = "block";
+
+        return 0;
+    }
+</script>
