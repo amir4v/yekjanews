@@ -5,33 +5,6 @@
 <html>
 
 <head>
-	<!-- TABLIGH mobile -->
-	<meta name="sabavision_zone" content="10064-Z282" />
-
-	<!-- YEKTANET script-e-sabet -->
-	<script type="text/javascript">
-		(function () {
-			var now = new Date();
-			var head = document.getElementsByTagName('head')[0];
-			var script = document.createElement('script');
-			script.async = true;
-			var script_address = 'https://cdn.yektanet.com/js/yekjanews.ir/native-yekjanews.ir-19014.js';
-			script.src = script_address + '?v=' + now.getFullYear().toString() + '0' + now.getMonth() + '0' + now.getDate() + '0' + now.getHours();
-			head.appendChild(script);
-		})();
-	</script>
-
-	<!-- MEDIAD script-e-sabet -->
-	<script type="text/javascript">
-		var head = document.getElementsByTagName("head")[0];
-		var script = document.createElement("script");
-		script.type = "text/javascript";
-		script.async = 1;
-		script.src = "https://s1.mediaad.org/serve/yekjanews.ir/loader.js";
-		head.appendChild(script);
-	</script>
-
-
 	<title>یکجا نیوز ~ Yekja NEWS</title>
 
 	<link rel="icon" type="image/gif" href="{% static 'icon.gif' %}" />
@@ -235,12 +208,6 @@
 		}
 
 
-		/* TABLIGH */
-		iframe {
-			width: 100% !important;
-		}
-
-
 		@media only all and (max-width: 767px) {
 			.bit-two {
 				margin-bottom: 1em;
@@ -280,37 +247,22 @@
 			</div>
 		</div>
 
-		<!-- { % include 'hr.html' % } -->
+		{% include 'hr.html' %}
 
 		<div class="row d-block d-md-block d-lg-none">
 			<div class="col">
 				{% include 'side.html' %}
 			</div>
 
-			<!-- { % include 'hr.html' % } -->
+			{% include 'hr.html' %}
 		</div>
 
-		<!-- { - % include 'aparat.html' % - }
+		{% include 'aparat.html' %}
 
 		<br>
 		<br>
-		<br> -->
+		<br>
 	</div>
-
-	<!-- TABLIGH script-e-sabet -->
-	<script>
-		var sabaVisionWebsiteID = "57c2da84-780e-441c-aea4-b00f00a0e944"; var sabaVisionWebsitePage = "ALL"
-	</script>
-	<link rel="stylesheet" href="https://plus.sabavision.com/dox/dox.min.css">
-	<script src="https://plus.sabavision.com/dox/dox.min.js"></script>
-
-	<!-- Statistics -->
-	<script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101322892);</script>
-	<script async src="//static.getclicky.com/js"></script>
-	<noscript>
-		<p><img alt="Clicky" width="0" height="0" src="//in.getclicky.com/101322892ns.gif" /></p>
-	</noscript>
-	<!-- Statistics -->
 
 	{% include 'footer.html' %}
 </body>

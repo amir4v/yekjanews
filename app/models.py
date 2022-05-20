@@ -4,16 +4,16 @@ from django.utils import timezone
 from .Utility import j_pub_dt
 
 
-# class AparatVideo(models.Model):
-#     # title = models.CharField(max_length=128, null=True, blank=True)
-#     # slug
-#     # description = models.CharField(max_length=4096, null=True, blank=True)
-#     pub_dt = models.DateTimeField(default=timezone.now)
-#     media = models.CharField(max_length=2048, unique=True, db_index=True)
-#
-#
-#     # def __str__(self):
-#     #     return self.title
+class AparatVideo(models.Model):
+    # title = models.CharField(max_length=128, null=True, blank=True)
+    # slug
+    # description = models.CharField(max_length=4096, null=True, blank=True)
+    pub_dt = models.DateTimeField(default=timezone.now)
+    media = models.CharField(max_length=2048, unique=True, db_index=True)
+
+
+    # def __str__(self):
+    #     return self.title
 
 
 class Category(models.Model):

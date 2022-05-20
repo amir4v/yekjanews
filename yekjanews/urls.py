@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-import debug_toolbar
+# import debug_toolbar
 
 from app.views import *
 from app.paginator_views import *
@@ -26,9 +26,9 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('dmn/', admin.site.urls),
+    path('admin/', admin.site.urls),
 
-    path('__debug__/', include(debug_toolbar.urls)),
+    # path('__debug__/', include(debug_toolbar.urls)),
     
     path('', index),
     path('important', important),
@@ -40,8 +40,6 @@ urlpatterns = [
     path('category/<int:pk>', category),
     path('category/<int:pk>/<str:title>', category), # END
     path('go/<int:pk>', go),
-
-    path('google30072320facbb1e3.html', google),
 
     path('paginator/index', paginator_index),
     path('paginator/important', paginator_important),
