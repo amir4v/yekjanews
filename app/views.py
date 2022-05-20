@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.db.models import Q
 
-from .models import rssNews, Category#, AparatVideo
+from .models import rssNews, Category
 
 
 # default fix context
@@ -16,8 +16,6 @@ def pre_context():
         'viewed': rssNews.objects.filter(pub_dt__gte=three_days_ago).order_by('-view')[:10],
 
         'cats': Category.objects.filter(is_important=True),
-
-        # 'videos': AparatVideo.objects.order_by('-pub_dt')[:3:-1],
     }
     return context
 
