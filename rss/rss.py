@@ -3,7 +3,7 @@ from ordering import order
 from seed import seed
 
 
-fast = True
+fast = True # True is for testing, False is for production
 
 seed()
 
