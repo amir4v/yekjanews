@@ -2,3 +2,5 @@
 *.pyc*
 yekjanews.zip
 db.sqlite3
+db.sqlite3-journal
+.vscode
