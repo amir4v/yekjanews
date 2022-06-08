@@ -28,9 +28,12 @@ def latest(   sleep_time_for_every_web_site_content_request_get=1
     try:
         news = []
         for rss in rsss:
-            text = r.get(rss[2]).text
+            try:
+                text = r.get(rss[2]).text
+            except:
+                continue
             time.sleep(sleep_time_for_every_web_site_content_request_get) # second(s) Sleep for every web-site-content request.get
-            bsd = bs(text, 'html.parser')
+            bsd = bs(text, "xml")
             items = bsd.find_all('item')
 
             news.extend([rss, i] for i in items)

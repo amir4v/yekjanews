@@ -35,10 +35,16 @@ urlpatterns = [
     path('viewed', viewed),
     path('latest', latest),
     path('search', search),
-    path('news/<int:pk>', news),                     # BEGIN
+
+    path('news/<int:pk>', news),
+    path('news/<int:pk>/', news),
     path('news/<int:pk>/<str:title>', news),
+    path('news/<int:pk>/<str:title>/', news),
     path('category/<int:pk>', category),
-    path('category/<int:pk>/<str:title>', category), # END
+    path('category/<int:pk>/', category),
+    path('category/<int:pk>/<str:title>', category),
+    path('category/<int:pk>/<str:title>/', category),
+
     path('go/<int:pk>', go),
 
     path('paginator/index', paginator_index),

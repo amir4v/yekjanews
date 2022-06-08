@@ -69,7 +69,7 @@ def search(request):
 
 
 # single news
-def news(request, pk, title=None):
+def news(request, pk, title=""):
     news = get_object_or_404(rssNews, pk=pk)
     news.view += 1
     news.save()
@@ -87,7 +87,7 @@ def go(request, pk):
 
 
 # category.rssnews_set -then- latest
-def category(request, pk, title=None):
+def category(request, pk, title=""):
     category = get_object_or_404(Category, pk=pk)
     context = {
         'list': category.rssnews_set.all().order_by('-pub_dt')[:10],

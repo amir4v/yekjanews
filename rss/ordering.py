@@ -51,9 +51,12 @@ def order(   sleep_time_for_every_web_site_content_request_get=1
 
         news = []
         for rss in rsss_important:
-            text = r.get(rss).text
+            try:
+                text = r.get(rss).text
+            except:
+                continue
             time.sleep(sleep_time_for_every_web_site_content_request_get) # second(s) Sleep for every web-site-content request.get
-            bsd = bs(text, 'html.parser')
+            bsd = bs(text, "xml")
             items = bsd.find_all('item')
 
 
@@ -88,7 +91,7 @@ def order(   sleep_time_for_every_web_site_content_request_get=1
                 get_news.is_important = True
                 get_news.save()
 
-                print('Is important')
+                print('Is-important')
 
 
             if sleep_time_for_every_web_site_content_request_get > 0:
@@ -102,9 +105,12 @@ def order(   sleep_time_for_every_web_site_content_request_get=1
 
         news = []
         for rss in rsss_view:
-            text = r.get(rss).text
+            try:
+                text = r.get(rss).text
+            except:
+                continue
             time.sleep(sleep_time_for_every_web_site_content_request_get) # second(s) Sleep for every web-site-content request.get
-            bsd = bs(text, 'html.parser')
+            bsd = bs(text, "xml")
             items = bsd.find_all('item')
 
 
@@ -140,7 +146,7 @@ def order(   sleep_time_for_every_web_site_content_request_get=1
                 get_news.check = True
                 get_news.save()
 
-                print('View ++')
+                print('View++')
 
             if sleep_time_for_every_web_site_content_request_get > 0:
                 time.sleep(sleep_time_for_processing_every_single_news) # (1)-second(s) For Every Single NEWS Processing # this is because the system and cpu do not being too busy
