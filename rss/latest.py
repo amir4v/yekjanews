@@ -1,9 +1,10 @@
-from proxy import Category, rssNews
-from bs4 import BeautifulSoup as bs
-import requests as r
-import random
-import time
 import re
+import time
+import random
+import requests as r
+from bs4 import BeautifulSoup as bs
+from proxy import Category, rssNews
+import helper
 
 
 rsss = [
@@ -33,14 +34,13 @@ def latest(   sleep_time_for_every_web_site_content_request_get=1
             except:
                 continue
             time.sleep(sleep_time_for_every_web_site_content_request_get) # second(s) Sleep for every web-site-content request.get
-            bsd = bs(text, "xml")
+            bsd = bs(text)
             items = bsd.find_all('item')
 
             news.extend([rss, i] for i in items)
 
         # MAKE A SHUFFLE LIST
         random.shuffle(news)
-
 
         for n in news:
             description = None
@@ -49,77 +49,59 @@ def latest(   sleep_time_for_every_web_site_content_request_get=1
             guid = None
             title = None
 
-
             if n[1].description and n[1].description.text.strip()!='':
-                description = n[1].description.text.strip()
-                description = re.sub(r'&.{1,6};', '', description)
-                description = re.sub(r'<img.*">', '', description)
-                description = re.sub(r'<img.* ">', '', description)
-                description = re.sub(r'<img.*"/>', '', description)
-                description = re.sub(r'<img.*" />', '', description)
-                description = re.sub(r'<.*/>', '', description)
-                description = re.sub(r'<.* />', '', description)
-                description = re.sub(r'<[a-z]+>', '', description)
-                description = re.sub(r'</.*>', '', description)
-                description = description.replace('&amp;', '') \
-                                            .replace('&nbsp;','') \
-                                            .replace('nbsp;','') \
-                                            .replace('&', '') \
-                                            .replace('  ', ' ') \
-                                            .replace('<![CDATA[', '') \
-                                            .replace(']]>', '') \
-                                            .strip()
+                description = helper.wordized(n[1].description.text, fa=True)
 
             if n[1].category and n[1].category.text.strip()!='':
-                category = n[1].category.text.replace('/', '|') \
-                                            .strip()
+                category = helper.wordized(n[1].category.text
+                                                            .replace('>', '-')
+                                                            .replace('/', '-')
+                                                            , fa=True)
 
             if n[1].media and n[1].media.get('url').strip()!='':
                 media = n[1].media.get('url').strip()
-            if n[1].thumbnail and n[1].thumbnail.get('url').strip()!='':
+            elif n[1].thumbnail and n[1].thumbnail.get('url').strip()!='':
                 media = n[1].thumbnail.get('url').strip()
-            if n[1].enclosure and n[1].enclosure.get('url').strip()!='':
+            elif n[1].enclosure and n[1].enclosure.get('url').strip()!='':
                 media = n[1].enclosure.get('url').strip()
 
             if n[1].title and n[1].title.text.strip()!='':
-                title = n[1].title.text.strip()
-                title = re.sub(r'&.{1,6};', '', title)
-                title = re.sub(r'<img.*">', '', title)
-                title = re.sub(r'<img.* ">', '', title)
-                title = re.sub(r'<img.*"/>', '', title)
-                title = re.sub(r'<img.*" />', '', title)
-                title = re.sub(r'<.*/>', '', title)
-                title = re.sub(r'<.* />', '', title)
-                title = re.sub(r'<[a-z]+>', '', title)
-                title = re.sub(r'</.*>', '', title)
-                title = title.replace('&', '') \
-                            .replace('  ', ' ') \
-                            .replace('/', '،') \
-                            .replace('«', '"') \
-                            .replace('»', '"') \
-                            .strip()
+                title = helper.wordized(n[1].title.text, fa=True)
 
             if n[1].link and n[1].link.text.strip()!='':
                 guid = n[1].link.text.strip()
-            if n[1].guid and n[1].guid.text.strip()!='':
+            elif n[1].guid and n[1].guid.text.strip()!='':
                 guid = n[1].guid.text.strip()
-            if n[1].link and n[1].link.text.strip()=='':
+            elif n[1].link and n[1].link.text.strip()=='':
                 link = n[1].link
                 guid = link.next.strip()
-
 
             # Error Check
             if ( (title is None) or (len(title) <= 0) ) or ( (guid is None) or (len(guid) <= 0) ):
                 continue
 
-
             if category:
                 category, is_category_created = Category.objects.get_or_create(title=category[:128] if category is not None else None)
 
-
             try:
+                # news_publisher_name=n[0][0][:128] if n[0][0] is not None else None
+                # news_publisher_address=n[0][1][:2048] if n[0][1] is not None else None
+                # description=description[:4096] if description is not None else None
+                # category=category
+                # media=media[:2048] if media is not None else None
+                # guid=guid[:2048] if guid is not None else None
+                # title=title[:128] if title is not None else None
+                # print(
+                #     news_publisher_name, '\n',
+                #     news_publisher_address, '\n',
+                #     description, '\n',
+                #     category, '\n',
+                #     media, '\n',
+                #     guid, '\n',
+                #     title, '\n',
+                #     '='*50,
+                # )
                 rssNews.objects.get_or_create(news_publisher_name=n[0][0][:128] if n[0][0] is not None else None, news_publisher_address=n[0][1][:2048] if n[0][1] is not None else None, description=description[:4096] if description is not None else None, category=category, media=media[:2048] if media is not None else None, guid=guid[:2048] if guid is not None else None, title=title[:128] if title is not None else None)
-
                 print('created')
             except Exception as e:
                 print(e)

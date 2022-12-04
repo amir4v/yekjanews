@@ -56,7 +56,7 @@ def order(   sleep_time_for_every_web_site_content_request_get=1
             except:
                 continue
             time.sleep(sleep_time_for_every_web_site_content_request_get) # second(s) Sleep for every web-site-content request.get
-            bsd = bs(text, "xml")
+            bsd = bs(text)
             items = bsd.find_all('item')
 
 
@@ -110,7 +110,7 @@ def order(   sleep_time_for_every_web_site_content_request_get=1
             except:
                 continue
             time.sleep(sleep_time_for_every_web_site_content_request_get) # second(s) Sleep for every web-site-content request.get
-            bsd = bs(text, "xml")
+            bsd = bs(text)
             items = bsd.find_all('item')
 
 
