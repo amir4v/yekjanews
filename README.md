@@ -1,4 +1,4 @@
-# Yekjanews
+# Yekjanews - Automated News Website
 
 ## Installation
 1- First clone this repo:
